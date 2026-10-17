@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfólio de desenvolvimento web: projetos, habilidades e certificados.">
+  <title>Meu Portfólio | Desenvolvedor Web</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Navegação principal">
+      <a class="brand" href="#inicio" aria-label="Ir para o início"><span class="brand-mark">&lt;/&gt;</span><span>Meu<span class="accent">Portfólio</span></span></a>
+      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#certificados">Certificados</a>
+        <a href="#contato" class="nav-cta">Contato</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="status-dot"></span> Em constante aprendizado</p>
+          <h1>Olá, eu sou <span class="gradient-text">Seu Nome</span>.<br>Desenvolvedor Web em formação.</h1>
+          <p class="hero-description">Estou aprendendo a criar experiências digitais modernas, acessíveis e responsivas com HTML, CSS e JavaScript.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#projetos">Ver meus projetos <span aria-hidden="true">↗</span></a>
+            <a class="button button-secondary" href="#contato">Entrar em contato</a>
+          </div>
+          <div class="social-note">Aberto a oportunidades de aprendizado e colaboração.</div>
+        </div>
+        <div class="hero-art" aria-label="Ilustração decorativa de código">
+          <div class="art-glow"></div>
+          <div class="code-window">
+            <div class="window-top"><i></i><i></i><i></i><span>meu-projeto.js</span></div>
+            <div class="code-lines" aria-hidden="true">
+              <p><span class="code-purple">const</span> objetivo = <span class="code-green">"criar"</span>;</p>
+              <p><span class="code-purple">function</span> <span class="code-blue">desenvolver</span>() {</p>
+              <p class="indent">aprendizado.<span class="code-blue">praticar</span>();</p>
+              <p class="indent">ideias.<span class="code-blue">transformar</span>();</p>
+              <p>}</p>
+              <p><span class="code-muted">// cada projeto é um passo</span></p>
+              <p><span class="code-blue">desenvolver</span>(); <span class="cursor">▍</span></p>
+            </div>
+          </div>
+          <div class="floating-tag tag-one">HTML <span>✓</span></div>
+          <div class="floating-tag tag-two">CSS <span>✦</span></div>
+          <div class="floating-tag tag-three">JS <span>↗</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about-section" id="sobre">
+      <div class="container about-grid">
+        <div>
+          <p class="eyebrow">Um pouco sobre mim</p>
+          <h2>Transformando curiosidade em <span class="gradient-text">projetos reais.</span></h2>
+        </div>
+        <div class="about-copy">
+          <p>Sou um desenvolvedor web em formação e estou construindo meu portfólio enquanto aprofundo meus conhecimentos. Gosto de aprender na prática, resolver problemas e melhorar cada projeto a cada versão.</p>
+          <p>Este site reúne alguns dos meus trabalhos, tecnologias que estou estudando e certificados que conquistei.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="habilidades">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">O que estou estudando</p>
+          <h2>Minhas habilidades</h2>
+          <p>Fundamentos que uso para construir páginas e aplicações web.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card"><span class="skill-icon html-icon">5</span><h3>HTML5</h3><p>Estruturação semântica de páginas.</p></article>
+          <article class="skill-card"><span class="skill-icon css-icon">3</span><h3>CSS3</h3><p>Layouts, estilos e design responsivo.</p></article>
+          <article class="skill-card"><span class="skill-icon js-icon">JS</span><h3>JavaScript</h3><p>Interatividade e funcionalidades.</p></article>
+          <article class="skill-card"><span class="skill-icon git-icon">⌘</span><h3>Git &amp; GitHub</h3><p>Versionamento e publicação de projetos.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section projects-section" id="projetos">
+      <div class="container">
+        <div class="section-heading heading-row">
+          <div><p class="eyebrow">Feito por mim</p><h2>Projetos em destaque</h2><p>Adicione aqui os seus projetos reais e os links dos repositórios.</p></div>
+          <a class="text-link" href="https://github.com/" target="_blank" rel="noopener noreferrer">Meu GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-visual task-visual"><span class="mock-browser"><i></i><i></i><i></i></span><div class="mock-task-title">Minha lista de tarefas</div><div class="mock-task-line"></div><div class="mock-task-line short"></div><div class="mock-task-line"></div></div>
+            <div class="project-content"><p class="project-type">JavaScript · Prática</p><h3>Lista de Tarefas</h3><p>Uma aplicação para organizar tarefas do dia a dia.</p><a class="text-link" href="#contato">Adicionar link do projeto ↗</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-visual weather-visual"><div class="sun">☀</div><strong>Clima da cidade</strong><span>Consulte as condições do tempo</span><div class="weather-bars"><i></i><i></i><i></i><i></i></div></div>
+            <div class="project-content"><p class="project-type">HTML · CSS · JavaScript</p><h3>Aplicação de Clima</h3><p>Uma interface para exibir informações meteorológicas.</p><a class="text-link" href="#contato">Adicionar link do projeto ↗</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-visual portfolio-visual"><span class="portfolio-symbol">&lt;/&gt;</span><strong>Meu espaço na web</strong><span>Projetos, aprendizado e evolução.</span></div>
+            <div class="project-content"><p class="project-type">HTML · CSS</p><h3>Meu Portfólio</h3><p>Esta página para apresentar meu aprendizado e meus trabalhos.</p><a class="text-link" href="#inicio">Ver esta página ↗</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section certificates-section" id="certificados">
+      <div class="container certificates-grid">
+        <div>
+          <p class="eyebrow">Aprendizado contínuo</p>
+          <h2>Meus <span class="gradient-text">certificados</span></h2>
+          <p class="section-intro">Cursos que concluí e que fazem parte da minha jornada em desenvolvimento web.</p>
+        </div>
+        <div class="certificate-list">
+          <article class="certificate-item"><span class="certificate-badge html-icon">5</span><div><h3>HTML5</h3><p>Fundamentos para Construção de Páginas Web Modernas</p></div><a href="certificados/html5-fundamentos.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir certificado de HTML5">Ver ↗</a></article>
+          <article class="certificate-item"><span class="certificate-badge css-icon">3</span><div><h3>CSS3</h3><p>Estilizando Páginas Web com Estilo</p></div><a href="certificados/css3-estilizando.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir certificado de CSS3">Ver ↗</a></article>
+          <article class="certificate-item"><span class="certificate-badge js-icon">JS</span><div><h3>JavaScript</h3><p>Fundamentos para Desenvolvimento Web Interativo</p></div><a href="certificados/javascript-fundamentos.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir certificado de JavaScript">Ver ↗</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contato">
+      <div class="container contact-grid">
+        <div><p class="eyebrow">Vamos conversar</p><h2>Tem uma ideia? <span class="gradient-text">Vamos conectar.</span></h2><p>Entre em contato para conversar sobre projetos, oportunidades ou aprendizado.</p><p class="contact-hint">Substitua os dados de exemplo pelos seus contatos reais.</p></div>
+        <div class="contact-links">
+          <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><span>GH</span><div><small>GitHub</small><strong>Adicionar seu perfil</strong></div><b>↗</b></a>
+          <a href="mailto:seuemail@exemplo.com"><span>@</span><div><small>E-mail</small><strong>seuemail@exemplo.com</strong></div><b>↗</b></a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"><span>in</span><div><small>LinkedIn</small><strong>Adicionar seu perfil</strong></div><b>↗</b></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-inner"><a class="brand" href="#inicio"><span class="brand-mark">&lt;/&gt;</span><span>Meu<span class="accent">Portfólio</span></span></a><p>Construído com HTML, CSS e JavaScript.</p><a href="#inicio" class="back-top">Voltar ao topo ↑</a></div></footer>
+</body>
+</html>
