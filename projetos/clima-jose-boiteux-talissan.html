@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101827">
+<title>Clima em José Boiteux | Talissan Silva</title>
+<style>
+:root{--bg:#0b1220;--panel:#14223a;--text:#eef5ff;--muted:#a6b6cd;--line:#2b3c59;--accent:#8cc8ff;--sun:#ffd98a}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:28px 16px;background:radial-gradient(circle at 80% 0%,#25476a 0,transparent 36%),linear-gradient(145deg,#0b1220,#101d32);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text)}main{max-width:1000px;margin:auto}.header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}.eyebrow{font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:800}.header h1{font-size:clamp(2rem,5vw,3.2rem);margin:8px 0}.header p{color:var(--muted);margin:0}.refresh{border:1px solid #47617f;background:#172c47;color:var(--text);padding:12px 16px;border-radius:12px;cursor:pointer;font:inherit}.hero{border:1px solid #355170;border-radius:26px;padding:clamp(22px,5vw,42px);background:linear-gradient(120deg,rgba(37,70,105,.95),rgba(20,34,58,.96));display:grid;grid-template-columns:1.3fr .7fr;gap:20px;align-items:center;box-shadow:0 20px 70px #0002}.place{color:#c4d9f1}.temp{font-size:clamp(4rem,12vw,7rem);font-weight:750;letter-spacing:-.08em;line-height:1;margin:16px 0}.description{font-size:1.2rem}.feels{color:var(--muted);margin-top:10px}.weather-icon{font-size:clamp(5rem,13vw,9rem);text-align:center;filter:drop-shadow(0 10px 15px #0003)}.updated{color:var(--muted);font-size:.82rem;margin-top:18px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}.metric,.forecast{background:rgba(20,34,58,.9);border:1px solid var(--line);border-radius:18px;padding:18px}.metric span{color:var(--muted);font-size:.85rem}.metric strong{display:block;font-size:1.55rem;margin-top:9px}.forecast-title{font-size:1.2rem;margin:28px 0 12px}.forecast-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.forecast{text-align:center;padding:16px 8px}.forecast .day{color:var(--muted);font-size:.83rem}.forecast .ico{font-size:2rem;margin:10px 0}.forecast strong{display:block}.forecast small{color:var(--muted)}.status{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:#101c2e;color:var(--muted);margin:14px 0}.footer{text-align:center;color:var(--muted);font-size:.82rem;margin-top:22px}.credit{color:#c4d9f1}.error{color:#ffd1d1}.loading{opacity:.7}
+@media(max-width:680px){.header{align-items:flex-start;flex-direction:column}.hero{grid-template-columns:1fr}.weather-icon{grid-row:1;text-align:left;font-size:5rem}.temp{font-size:5rem}.grid{grid-template-columns:repeat(2,1fr)}.forecast-grid{grid-template-columns:repeat(2,1fr)}.forecast:last-child{grid-column:span 2}}
+</style>
+</head>
+<body>
+<main>
+<header class="header">
+ <div><div class="eyebrow">Clima local · Santa Catarina</div><h1>Tempo agora<span style="color:var(--accent)">.</span></h1><p>Informações meteorológicas de José Boiteux, SC.</p></div>
+ <button class="refresh" id="refresh">↻ Atualizar clima</button>
+</header>
+<div class="status" id="status" role="status">Carregando as condições do tempo...</div>
+<section class="hero" id="hero">
+ <div><div class="place">📍 José Boiteux, Santa Catarina</div><div class="temp" id="temp">--°</div><div class="description" id="description">Buscando condições...</div><div class="feels" id="feels">Sensação térmica: --</div><div class="updated" id="updated"></div></div>
+ <div class="weather-icon" id="icon" aria-hidden="true">🌦️</div>
+</section>
+<section class="grid">
+ <div class="metric"><span>💧 Umidade</span><strong id="humidity">--%</strong></div>
+ <div class="metric"><span>💨 Vento</span><strong id="wind">-- km/h</strong></div>
+ <div class="metric"><span>🌧️ Chuva</span><strong id="rain">-- mm</strong></div>
+ <div class="metric"><span>☁️ Nebulosidade</span><strong id="cloud">--%</strong></div>
+</section>
+<h2 class="forecast-title">Previsão para os próximos dias</h2>
+<section class="forecast-grid" id="forecast"><div class="forecast">Carregando previsão...</div></section>
+<p class="footer">Projeto de portfólio desenvolvido por <span class="credit">Talissan Luis da Silva</span> · Dados meteorológicos via Open-Meteo.</p>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const weatherCodes={
+ 0:['Céu limpo','☀️'],1:['Predominantemente limpo','🌤️'],2:['Parcialmente nublado','⛅'],3:['Nublado','☁️'],
+ 45:['Nevoeiro','🌫️'],48:['Nevoeiro com geada','🌫️'],51:['Garoa fraca','🌦️'],53:['Garoa moderada','🌦️'],55:['Garoa intensa','🌧️'],
+ 56:['Garoa congelante fraca','🌧️'],57:['Garoa congelante intensa','🌧️'],61:['Chuva fraca','🌦️'],63:['Chuva moderada','🌧️'],65:['Chuva forte','🌧️'],
+ 66:['Chuva congelante fraca','🌧️'],67:['Chuva congelante forte','🌧️'],71:['Neve fraca','🌨️'],73:['Neve moderada','🌨️'],75:['Neve forte','❄️'],
+ 77:['Grãos de neve','🌨️'],80:['Pancadas de chuva fracas','🌦️'],81:['Pancadas de chuva moderadas','🌧️'],82:['Pancadas de chuva fortes','⛈️'],
+ 85:['Pancadas de neve fracas','🌨️'],86:['Pancadas de neve fortes','❄️'],95:['Trovoada','⛈️'],96:['Trovoada com granizo fraco','⛈️'],99:['Trovoada com granizo forte','⛈️']
+};
+function describe(code){return weatherCodes[code]||['Condição não identificada','🌡️']}
+function dateLabel(date,index){if(index===0)return 'Hoje';if(index===1)return 'Amanhã';return new Intl.DateTimeFormat('pt-BR',{weekday:'short',timeZone:'UTC'}).format(new Date(date+'T12:00:00Z')).replace('.','')}
+async function loadWeather(){
+ const btn=$('refresh');btn.disabled=true;btn.textContent='Atualizando...';$('status').textContent='Buscando dados meteorológicos atualizados...';$('status').classList.remove('error');$('hero').classList.add('loading');
+ try{
+  // Coordenadas aproximadas do centro de José Boiteux, SC.
+  const url='https://api.open-meteo.com/v1/forecast?latitude=-26.956&longitude=-49.628&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=America%2FSao_Paulo&forecast_days=5';
+  const response=await fetch(url);if(!response.ok)throw new Error('Não foi possível consultar o serviço de clima.');
+  const data=await response.json();const c=data.current;const [desc,ico]=describe(c.weather_code);
+  $('temp').textContent=Math.round(c.temperature_2m)+'°';$('description').textContent=desc;$('icon').textContent=ico;
+  $('feels').textContent='Sensação térmica: '+Math.round(c.apparent_temperature)+'°C';
+  $('humidity').textContent=c.relative_humidity_2m+'%';$('wind').textContent=Math.round(c.wind_speed_10m)+' km/h';
+  $('rain').textContent=Number(c.precipitation).toLocaleString('pt-BR')+' mm';$('cloud').textContent=c.cloud_cover+'%';
+  $('updated').textContent='Atualizado em '+new Intl.DateTimeFormat('pt-BR',{hour:'2-digit',minute:'2-digit'}).format(new Date());
+  $('forecast').innerHTML='';
+  data.daily.time.forEach((day,i)=>{const [d,ic]=describe(data.daily.weather_code[i]);const card=document.createElement('article');card.className='forecast';
+   const label=document.createElement('div');label.className='day';label.textContent=dateLabel(day,i);
+   const icon=document.createElement('div');icon.className='ico';icon.textContent=ic;
+   const descEl=document.createElement('small');descEl.textContent=d;
+   const temps=document.createElement('strong');temps.textContent=Math.round(data.daily.temperature_2m_max[i])+'° / '+Math.round(data.daily.temperature_2m_min[i])+'°';
+   const rain=document.createElement('small');rain.textContent='Chuva: '+(data.daily.precipitation_probability_max[i]??0)+'%';
+   card.append(label,icon,temps,descEl,rain);$('forecast').append(card);
+  });
+  $('status').textContent='Dados atualizados. A previsão pode mudar ao longo do dia.';
+ }catch(error){$('status').textContent='Não foi possível carregar o clima. Verifique sua conexão e tente novamente.';$('status').classList.add('error');$('description').textContent='Dados indisponíveis';$('forecast').innerHTML='<div class="forecast">A previsão não pôde ser carregada agora.</div>'}
+ finally{$('hero').classList.remove('loading');btn.disabled=false;btn.textContent='↻ Atualizar clima'}
+}
+$('refresh').addEventListener('click',loadWeather);loadWeather();
+</script>
+</body>
+</html>
